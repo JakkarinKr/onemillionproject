@@ -1,0 +1,155 @@
+.page {
+  min-height: 100vh;
+  background: #f5f2ec;
+  font-family: 'DM Sans', sans-serif;
+  padding: 36px 40px 80px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e2d1e;
+  margin: 0 0 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #8a9c8a;
+  margin: 0;
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #2d5a2d;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+}
+.addBtn:hover { background: #1e4020; transform: translateY(-1px); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.landIcon {
+  width: 44px;
+  height: 44px;
+  background: #f0f8e8;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.cropCountBadge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3d6b3d;
+  background: #e8f5e0;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.landName {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e2d1e;
+  margin: 0 0 12px;
+}
+
+.landMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.metaItem {
+  font-size: 13px;
+  color: #5a6e5a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.landNotes {
+  font-size: 13px;
+  color: #8a9c8a;
+  margin: 0 0 14px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardFooter {
+  border-top: 1px solid #f0f4f0;
+  padding-top: 12px;
+}
+
+.viewLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: #3d6b3d;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8a9c8a;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.emptyIcon { font-size: 48px; }
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .page { padding: 24px 20px 60px; }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+}

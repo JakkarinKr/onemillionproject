@@ -1,0 +1,377 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+.page {
+  min-height: 100vh;
+  background: #f5f2ec;
+  font-family: 'DM Sans', sans-serif;
+  padding-bottom: 60px;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  font-size: 15px;
+  color: #8a9c8a;
+  gap: 12px;
+}
+
+.backLink {
+  color: #3d6b3d;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ===== Top Section ===== */
+.topSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 320px;
+}
+
+.infoCol {
+  padding: 48px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.botanicalBadge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 500;
+  color: #4a6a4a;
+  background: #e8f0e0;
+  border-radius: 20px;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+  letter-spacing: 0.03em;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: #1e3a1e;
+  line-height: 1.05;
+  margin: 0 0 16px;
+  letter-spacing: -1px;
+}
+
+.description {
+  font-size: 14px;
+  color: #5a6e5a;
+  line-height: 1.7;
+  margin: 0 0 28px;
+  max-width: 420px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: #2d5a2d;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.actionBtn:hover { background: #1e4020; }
+
+.editBtn {
+  padding: 11px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #c8d8c8;
+  background: #fff;
+  color: #3d6b3d;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.editBtn:hover { border-color: #2d5a2d; }
+
+/* ===== Image col ===== */
+.imageCol {
+  position: relative;
+  overflow: hidden;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 320px;
+}
+
+.heroPlaceholder {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  background: linear-gradient(135deg, #e8f5e0, #d0e8c0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+}
+
+.flavorCard {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.flavorLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #8a9c8a;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.flavorText {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1e2d1e;
+  margin: 0;
+}
+
+/* ===== Bottom Section ===== */
+.bottomSection {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 32px;
+  padding: 36px 48px;
+  max-width: 1100px;
+}
+
+/* ===== Side Col ===== */
+.sideCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Quick Facts */
+.quickFacts {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.quickFactsTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e2d1e;
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qfIcon {
+  width: 22px;
+  height: 22px;
+  background: #2d5a2d;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.factItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.factItem:last-child { margin-bottom: 0; }
+
+.factIcon {
+  width: 32px;
+  height: 32px;
+  background: #f0f8e8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.factLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: #8a9c8a;
+  margin-bottom: 2px;
+}
+
+.factValue {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e2d1e;
+  line-height: 1.4;
+}
+
+/* Pro Tips */
+.proTips {
+  background: #f97316;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.proTipsTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.proTipsText {
+  font-size: 13px;
+  color: rgba(255,255,255,0.9);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== Main Col ===== */
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e3a1e;
+  margin: 0 0 20px;
+}
+
+/* Steps */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.stepItem {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.stepNum {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #2d5a2d;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.stepContent { flex: 1; }
+
+.stepTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e2d1e;
+  margin: 0 0 6px;
+}
+
+.stepDesc {
+  font-size: 13px;
+  color: #5a6e5a;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Companion Planting */
+.companionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.companionCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.companionImg {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: #e8f5e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.companionName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e2d1e;
+  margin-bottom: 4px;
+}
+
+.companionDesc {
+  font-size: 12px;
+  color: #7a8c7a;
+  line-height: 1.5;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .topSection { grid-template-columns: 1fr; }
+  .imageCol { min-height: 260px; }
+  .heroImg { min-height: 260px; }
+  .heroPlaceholder { min-height: 260px; }
+  .bottomSection { grid-template-columns: 1fr; padding: 24px 24px; }
+  .title { font-size: 38px; }
+  .infoCol { padding: 32px 24px 24px; }
+  .companionGrid { grid-template-columns: 1fr; }
+}

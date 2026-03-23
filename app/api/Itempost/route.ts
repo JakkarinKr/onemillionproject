@@ -13,7 +13,7 @@ export async function POST(request: Request) {
  
     if (!itemno || !name) {
       return Response.json(
-        { error: "itemno and name are required" },
+        { error: "itemno and name are required" },  
         { status: 400 }
       );
     }

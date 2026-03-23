@@ -1,383 +1,176 @@
-// components/Sidebar.tsx
 "use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import styles from "./Sidebar.module.css";
 
-const NAV_SECTIONS = [
+const navItems = [
   {
-    label: "General",
-    items: [
-      { label: "Home",      href: "/",          icon: "⌂" },
-      { label: "Dashboard", href: "/dashboard", icon: "▦" },
-      { label: "Items",     href: "/Items",     icon: "≡" },
+    label: "Dashboard",
+    href: "/",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+        <rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Lands",
+    href: "/lands",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 22V12h6v10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    children: [
+      { label: "All Lands", href: "/lands" },
+      { label: "Add New Land", href: "/lands/create" },
     ],
   },
   {
-    label: "Manage",
-    items: [
-      { label: "Settings",  href: "/settings",  icon: "⚙" },
-      { label: "Users",     href: "/users",     icon: "◎" },
-      { label: "Reports",   href: "/reports",   icon: "↗" },
+    label: "Crops",
+    href: "/crops",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M12 22V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M12 12C12 12 7 10 5 6C5 6 10 4 12 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 12C12 12 17 10 19 6C19 6 14 4 12 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 17C12 17 8 15.5 6 12C6 12 10 10 12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 17C12 17 16 15.5 18 12C18 12 14 10 12 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+    children: [
+      { label: "All Crops", href: "/crops" },
+      { label: "Add New Crop", href: "/crops/create" },
     ],
+  },
+  {
+    label: "Categories",
+    href: "/categories",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M4 6h16M4 12h10M4 18h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Planting Guides",
+    href: "/guides",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M9 7h6M9 11h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    label: "Reports",
+    href: "/reports",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+];
+
+const bottomItems = [
+  {
+    label: "Settings",
+    href: "/settings",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" strokeWidth="1.5"/>
+      </svg>
+    ),
   },
 ];
 
 export default function Sidebar() {
   const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap');
+    <aside className={styles.sidebar}>
+      {/* Logo */}
+      <div className={styles.logo}>
+        <div className={styles.logoIcon}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6 2 3 7 3 12s3 10 9 10 9-5 9-10S18 2 12 2z" fill="#2d5a2d"/>
+            <path d="M12 22V10M8 14c0-2 2-4 4-4s4 2 4 4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+        </div>
+        <span className={styles.logoText}>FarmLog</span>
+      </div>
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      {/* Nav */}
+      <nav className={styles.nav}>
+        <ul className={styles.navList}>
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`${styles.navItem} ${isActive(item.href) ? styles.navItemActive : ""}`}
+              >
+                <span className={styles.navIcon}>{item.icon}</span>
+                <span className={styles.navLabel}>{item.label}</span>
+              </Link>
 
-        :root {
-          --sidebar-bg: #111114;
-          --sidebar-border: rgba(255,255,255,0.06);
-          --sidebar-width: 220px;
-          --sidebar-collapsed-width: 60px;
-          --text-muted: rgba(255,255,255,0.38);
-          --text-base: rgba(255,255,255,0.65);
-          --text-active: #f5f5f5;
-          --accent: #4ade80;
-          --hover-bg: rgba(255,255,255,0.05);
-          --active-bg: rgba(74,222,128,0.1);
-          --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
-        }
-
-        body {
-          font-family: 'Geist', sans-serif;
-          background: #0d0d10;
-          color: #e0e0e0;
-        }
-
-        .app-shell {
-          display: flex;
-          min-height: 100vh;
-        }
-
-        .app-main {
-          flex: 1;
-          padding: 2rem;
-          overflow-y: auto;
-        }
-
-        /* ── Sidebar ── */
-        .sidebar {
-          position: sticky;
-          top: 0;
-          height: 100vh;
-          width: var(--sidebar-width);
-          min-width: var(--sidebar-width);
-          background: var(--sidebar-bg);
-          border-right: 1px solid var(--sidebar-border);
-          display: flex;
-          flex-direction: column;
-          transition: width var(--transition), min-width var(--transition);
-          overflow: hidden;
-          z-index: 50;
-        }
-
-        .sidebar.collapsed {
-          width: var(--sidebar-collapsed-width);
-          min-width: var(--sidebar-collapsed-width);
-        }
-
-        /* Logo */
-        .sidebar__logo {
-          display: flex;
-          align-items: center;
-          gap: 0.65rem;
-          padding: 1.1rem 1rem;
-          border-bottom: 1px solid var(--sidebar-border);
-          text-decoration: none;
-          overflow: hidden;
-          white-space: nowrap;
-        }
-
-        .sidebar__logo-icon {
-          width: 28px;
-          height: 28px;
-          min-width: 28px;
-          background: var(--accent);
-          border-radius: 7px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Geist Mono', monospace;
-          font-size: 0.7rem;
-          font-weight: 500;
-          color: #0d0d10;
-          letter-spacing: -0.03em;
-        }
-
-        .sidebar__logo-text {
-          font-size: 0.92rem;
-          font-weight: 600;
-          color: var(--text-active);
-          letter-spacing: -0.02em;
-          opacity: 1;
-          transition: opacity var(--transition);
-        }
-
-        .collapsed .sidebar__logo-text { opacity: 0; pointer-events: none; }
-
-        /* Nav */
-        .sidebar__nav {
-          flex: 1;
-          overflow-y: auto;
-          overflow-x: hidden;
-          padding: 0.75rem 0;
-          scrollbar-width: none;
-        }
-        .sidebar__nav::-webkit-scrollbar { display: none; }
-
-        .sidebar__section { margin-bottom: 0.25rem; }
-
-        .sidebar__section-label {
-          font-size: 0.62rem;
-          font-weight: 600;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          color: var(--text-muted);
-          padding: 0.5rem 1rem 0.25rem;
-          white-space: nowrap;
-          overflow: hidden;
-          opacity: 1;
-          transition: opacity var(--transition);
-        }
-
-        .collapsed .sidebar__section-label { opacity: 0; }
-
-        .sidebar__items { list-style: none; }
-
-        .sidebar__link {
-          display: flex;
-          align-items: center;
-          gap: 0.7rem;
-          padding: 0.5rem 1rem;
-          text-decoration: none;
-          color: var(--text-base);
-          font-size: 0.84rem;
-          font-weight: 500;
-          border-radius: 0;
-          transition: color 0.15s, background 0.15s;
-          white-space: nowrap;
-          overflow: hidden;
-          position: relative;
-          margin: 1px 0.5rem;
-          border-radius: 7px;
-        }
-
-        .sidebar__link:hover {
-          background: var(--hover-bg);
-          color: var(--text-active);
-        }
-
-        .sidebar__link--active {
-          background: var(--active-bg);
-          color: var(--accent);
-        }
-
-        .sidebar__link--active::before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 3px;
-          height: 60%;
-          background: var(--accent);
-          border-radius: 0 3px 3px 0;
-        }
-
-        .sidebar__icon {
-          font-size: 1rem;
-          min-width: 20px;
-          text-align: center;
-          line-height: 1;
-        }
-
-        .sidebar__link-label {
-          opacity: 1;
-          transition: opacity var(--transition);
-        }
-
-        .collapsed .sidebar__link-label { opacity: 0; }
-
-        /* Collapse button */
-        .sidebar__footer {
-          padding: 0.75rem 0.5rem;
-          border-top: 1px solid var(--sidebar-border);
-        }
-
-        .sidebar__collapse-btn {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          gap: 0.7rem;
-          padding: 0.5rem 0.6rem;
-          background: none;
-          border: none;
-          cursor: pointer;
-          color: var(--text-muted);
-          font-size: 0.82rem;
-          font-family: 'Geist', sans-serif;
-          border-radius: 7px;
-          transition: color 0.15s, background 0.15s;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-
-        .sidebar__collapse-btn:hover {
-          color: var(--text-active);
-          background: var(--hover-bg);
-        }
-
-        .sidebar__collapse-icon {
-          min-width: 20px;
-          text-align: center;
-          font-size: 0.9rem;
-          transition: transform var(--transition);
-        }
-
-        .collapsed .sidebar__collapse-icon { transform: rotate(180deg); }
-
-        .sidebar__collapse-label {
-          opacity: 1;
-          transition: opacity var(--transition);
-        }
-
-        .collapsed .sidebar__collapse-label { opacity: 0; }
-
-        /* Mobile overlay */
-        .sidebar__overlay {
-          display: none;
-          position: fixed;
-          inset: 0;
-          background: rgba(0,0,0,0.6);
-          z-index: 49;
-        }
-
-        /* Mobile toggle */
-        .sidebar__mobile-toggle {
-          display: none;
-          position: fixed;
-          top: 1rem;
-          left: 1rem;
-          z-index: 60;
-          background: var(--sidebar-bg);
-          border: 1px solid var(--sidebar-border);
-          color: var(--text-active);
-          width: 38px;
-          height: 38px;
-          border-radius: 8px;
-          cursor: pointer;
-          font-size: 1rem;
-          align-items: center;
-          justify-content: center;
-        }
-
-        /* Tooltip for collapsed icons */
-        .sidebar__link {
-          position: relative;
-        }
-
-        @media (max-width: 768px) {
-          .sidebar__mobile-toggle { display: flex; }
-
-          .sidebar {
-            position: fixed;
-            top: 0; left: 0; bottom: 0;
-            transform: translateX(-100%);
-            transition: transform var(--transition);
-            width: var(--sidebar-width) !important;
-            min-width: var(--sidebar-width) !important;
-          }
-
-          .sidebar.mobile-open {
-            transform: translateX(0);
-          }
-
-          .sidebar__overlay.visible { display: block; }
-
-          .sidebar .sidebar__logo-text,
-          .sidebar .sidebar__section-label,
-          .sidebar .sidebar__link-label,
-          .sidebar .sidebar__collapse-label {
-            opacity: 1 !important;
-          }
-
-          .app-main { padding: 1rem; padding-top: 4rem; }
-        }
-      `}</style>
-
-      {/* Mobile toggle */}
-      <button
-        className="sidebar__mobile-toggle"
-        onClick={() => setMobileOpen(true)}
-        aria-label="Open menu"
-      >
-        ☰
-      </button>
-
-      {/* Overlay */}
-      <div
-        className={`sidebar__overlay${mobileOpen ? " visible" : ""}`}
-        onClick={() => setMobileOpen(false)}
-      />
-
-      <aside className={`sidebar${collapsed ? " collapsed" : ""}${mobileOpen ? " mobile-open" : ""}`}>
-        {/* Logo */}
-        <Link href="/" className="sidebar__logo">
-          <span className="sidebar__logo-icon">APP</span>General
-          <span className="sidebar__logo-text">MyApp</span>
-        </Link>
-
-        {/* Nav sections */}
-        <nav className="sidebar__nav">
-          {NAV_SECTIONS.map((section) => (
-            <div key={section.label} className="sidebar__section">
-              <div className="sidebar__section-label">{section.label}</div>
-              <ul className="sidebar__items">
-                {section.items.map(({ label, href, icon }) => {
-                  const active = pathname === href;
-                  return (
-                    <li key={href}>
+              {/* Sub-items */}
+              {item.children && isActive(item.href) && (
+                <ul className={styles.subList}>
+                  {item.children.map((child) => (
+                    <li key={child.href}>
                       <Link
-                        href={href}
-                        className={`sidebar__link${active ? " sidebar__link--active" : ""}`}
-                        onClick={() => setMobileOpen(false)}
-                        title={collapsed ? label : undefined}
+                        href={child.href}
+                        className={`${styles.subItem} ${pathname === child.href ? styles.subItemActive : ""}`}
                       >
-                        <span className="sidebar__icon">{icon}</span>
-                        <span className="sidebar__link-label">{label}</span>
+                        {child.label}
                       </Link>
                     </li>
-                  );
-                })}
-              </ul>
-            </div>
+                  ))}
+                </ul>
+              )}
+            </li>
           ))}
-        </nav>
+        </ul>
+      </nav>
 
-        {/* Footer / Collapse */}
-        <div className="sidebar__footer">
-          <button
-            className="sidebar__collapse-btn"
-            onClick={() => setCollapsed((v) => !v)}
-            aria-label="Toggle sidebar"
-          >
-            <span className="sidebar__collapse-icon">«</span>
-            <span className="sidebar__collapse-label">Collapse</span>
-          </button>
+      {/* Bottom */}
+      <div className={styles.bottom}>
+        <ul className={styles.navList}>
+          {bottomItems.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`${styles.navItem} ${isActive(item.href) ? styles.navItemActive : ""}`}
+              >
+                <span className={styles.navIcon}>{item.icon}</span>
+                <span className={styles.navLabel}>{item.label}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* User */}
+        <div className={styles.user}>
+          <div className={styles.avatar}>F</div>
+          <div className={styles.userInfo}>
+            <span className={styles.userName}>Farmer</span>
+            <span className={styles.userRole}>Admin</span>
+          </div>
         </div>
-      </aside>
-    </>
+      </div>
+    </aside>
   );
 }

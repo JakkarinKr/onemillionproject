@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+.page {
+  min-height: 100vh;
+  background: #f5f2ec;
+  padding-bottom: 80px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ===== Hero ===== */
+.hero {
+  padding: 48px 48px 32px;
+  max-width: 900px;
+}
+
+.heroTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: #1e3a1e;
+  line-height: 1.05;
+  margin: 0 0 12px;
+  letter-spacing: -1px;
+}
+
+.heroSub {
+  font-size: 14px;
+  color: #6a7c6a;
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 0 28px;
+}
+
+/* ===== Search ===== */
+.searchWrap {
+  position: relative;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8a9c8a;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  border-radius: 24px;
+  border: 1.5px solid #dde8dd;
+  background: #fff;
+  font-size: 14px;
+  color: #1e2d1e;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.searchInput:focus {
+  border-color: #3d6b3d;
+  box-shadow: 0 0 0 3px rgba(61,107,61,0.08);
+}
+.searchInput::placeholder { color: #a8b8a8; }
+
+/* ===== Filters ===== */
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1.5px solid #dde8dd;
+  background: #fff;
+  color: #4a604a;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.filterBtn:hover {
+  border-color: #3d6b3d;
+  color: #2d5a2d;
+}
+.filterBtnActive {
+  background: #2d5a2d;
+  border-color: #2d5a2d;
+  color: #fff;
+}
+
+/* ===== Grid ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 24px 48px;
+  max-width: 1100px;
+}
+
+/* ===== Card ===== */
+.card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+}
+
+.cardImage {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: #e8f0e0;
+}
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+.card:hover .cardImage img {
+  transform: scale(1.04);
+}
+
+.cardImagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  background: linear-gradient(135deg, #e8f5e0, #d0e8c0);
+}
+
+.cardBody {
+  padding: 16px 18px 14px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.cardName {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1e2d1e;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cardCategory {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #2d5a2d;
+  background: #e8f5e0;
+  padding: 3px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cardSeason {
+  font-size: 12px;
+  color: #7a8c7a;
+  margin: 0 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.seasonDot {
+  color: #5a8a5a;
+  font-size: 10px;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f0f4f0;
+  padding-top: 12px;
+}
+
+/* ===== Difficulty ===== */
+.difficulty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.difficultyLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #9aaa9a;
+}
+
+.difficultyDots {
+  display: flex;
+  gap: 3px;
+}
+
+.dot {
+  width: 18px;
+  height: 6px;
+  border-radius: 3px;
+  background: #e0e8e0;
+  transition: background 0.15s;
+}
+.dotFilled {
+  background: #2d5a2d;
+}
+
+/* ===== Add circle button ===== */
+.addCircleBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ff7043;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.15s;
+  flex-shrink: 0;
+}
+.addCircleBtn:hover {
+  background: #e64a19;
+  transform: scale(1.1);
+}
+
+/* ===== Empty state ===== */
+.empty {
+  padding: 60px 48px;
+  text-align: center;
+  color: #8a9c8a;
+  font-size: 15px;
+}
+
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: #2d5a2d;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.addBtn:hover { background: #1e4020; }
+
+/* ===== FAB ===== */
+.fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #2d5a2d;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(45,90,45,0.4);
+  transition: background 0.15s, transform 0.15s;
+  z-index: 50;
+}
+.fab:hover {
+  background: #1e4020;
+  transform: scale(1.08);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); padding: 20px 24px; }
+  .hero { padding: 32px 24px 24px; }
+  .heroTitle { font-size: 38px; }
+}
+
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+}
